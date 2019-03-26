@@ -22,4 +22,4 @@ By tweaking those parameters (TANH SLOPE and SINE FREQ) and the relative amplitu
 
 * [Fifty shades of distortion (ADC17)](https://www.youtube.com/watch?v=oIChUOV_0w4): great video/tutorial about distortion in general, including waveshaping and more. 
 
-* [Concise explanation of waveshaping](http://sites.music.columbia.edu/cmc/MusicAndComputers/chapter4/04_06.php)).
+* [Concise explanation of waveshaping](http://sites.music.columbia.edu/cmc/MusicAndComputers/chapter4/04_06.php).
