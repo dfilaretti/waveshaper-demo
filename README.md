@@ -8,8 +8,8 @@ Simple Waveshaping effect with tweakable transfer function.
 
 ## Description
 
-The input signal's level is first scaled via the DRIVE control, after that the signal is passed through the waveshape transfer function. 
-Finally, the MIX control allow to blend between the original and modified signals. 
+The input signal's level is first scaled via the DRIVE control, and then passed through the transfer function to obtain to apply distortion. 
+The MIX control allow to blend between the original and modified signals. 
 
 The tranfers function is made of two building blocks:
 
