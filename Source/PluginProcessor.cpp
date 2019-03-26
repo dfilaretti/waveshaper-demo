@@ -13,17 +13,14 @@
 
 //==============================================================================
 WaveshaperDemoAudioProcessor::WaveshaperDemoAudioProcessor()
-	: parameters(*this, nullptr)
+	: parameters(*this, nullptr, "Waveshaper", 
+				{ std::make_unique<AudioParameterFloat> ("DRIVE", "Drive", NormalisableRange<float>(0.f, 40.f, 0.01), 20.f),
+				  std::make_unique<AudioParameterFloat> ("MIX", "Mix", NormalisableRange<float>(0.f, 100.f, 0.01), 100.f),
+		          std::make_unique<AudioParameterFloat> ("TANHAMP", "Tanh amp", NormalisableRange<float>(0.f, 100.f, 0.01), 100.f),
+		          std::make_unique<AudioParameterFloat> ("TANHSLOPE", "Tanh slope", NormalisableRange<float>(1.f, 15.f, 0.01), 1.f),
+		          std::make_unique<AudioParameterFloat> ("SINEAMP", "Sine amp", NormalisableRange<float>(0.f, 100.f, 0.01), 0.f),
+		          std::make_unique<AudioParameterFloat> ("SINEFREQ", "Sine freq", NormalisableRange<float>(0.5f, 100.f, 0.01), 1.f) })
 {
-	parameters.createAndAddParameter("DRIVE", "Drive", String(), NormalisableRange<float>(0.f, 40.f, 0.01), 20.f, nullptr, nullptr);
-	parameters.createAndAddParameter("MIX", "Mix", String(), NormalisableRange<float>(0.f, 100.f, 0.01), 100.f, nullptr, nullptr);
-	parameters.createAndAddParameter("TANHAMP", "Tanh amp", String(), NormalisableRange<float>(0.f, 100.f, 0.01), 100.f, nullptr, nullptr);
-	parameters.createAndAddParameter("TANHSLOPE", "Tanh slope", String(), NormalisableRange<float>(1.f, 15.f, 0.01), 1.f, nullptr, nullptr);
-	parameters.createAndAddParameter("SINEAMP", "Sine amp", String(), NormalisableRange<float>(0.f, 100.f, 0.01), 0.f, nullptr, nullptr);
-	parameters.createAndAddParameter("SINEFREQ", "Sine freq", String(), NormalisableRange<float>(0.5f, 100.f, 0.01), 1.f, nullptr, nullptr);
-
-	parameters.state = ValueTree(Identifier("Waveshaper"));
-
 	prmDrive = parameters.getRawParameterValue("DRIVE");
 	prmMix = parameters.getRawParameterValue("MIX");
 	prmTanhAmp = parameters.getRawParameterValue("TANHAMP");
