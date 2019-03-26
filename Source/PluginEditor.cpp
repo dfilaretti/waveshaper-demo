@@ -70,10 +70,10 @@ WaveshaperAudioProcessorEditor::WaveshaperAudioProcessorEditor(WaveshaperDemoAud
 
 void WaveshaperAudioProcessorEditor::OnWaveshapeParamsChanged()
 {
-	float newTanhAmp   = tanhAmpSlider.getValue();
-	float newTanhSlope = tanhSlopeSlider.getValue();
-	float newSinAmp    = sineAmpSlider.getValue();
-	float newSinFreq   = sineFreqSlider.getValue();
+	auto newTanhAmp   = static_cast<float> (tanhAmpSlider.getValue());
+	auto newTanhSlope = static_cast<float> (tanhSlopeSlider.getValue());
+	auto newSinAmp    = static_cast<float> (sineAmpSlider.getValue());
+	auto newSinFreq   = static_cast<float> (sineFreqSlider.getValue());
 
 	transferFunctionGraph.setTanhAmp(newTanhAmp);
 	transferFunctionGraph.setTanhSlope(newTanhSlope);
@@ -89,7 +89,7 @@ WaveshaperAudioProcessorEditor::~WaveshaperAudioProcessorEditor()
 
 void WaveshaperAudioProcessorEditor::paint(Graphics& g)
 {
-	g.fillAll(Colours::darkslategrey.withMultipliedBrightness(.4));
+	g.fillAll(Colours::darkslategrey.withMultipliedBrightness(.4f));
 }
 
 void WaveshaperAudioProcessorEditor::resized()

@@ -14,12 +14,12 @@
 //==============================================================================
 WaveshaperDemoAudioProcessor::WaveshaperDemoAudioProcessor()
 	: parameters(*this, nullptr, "Waveshaper", 
-				{ std::make_unique<AudioParameterFloat> ("DRIVE", "Drive", NormalisableRange<float>(0.f, 40.f, 0.01), 20.f),
-				  std::make_unique<AudioParameterFloat> ("MIX", "Mix", NormalisableRange<float>(0.f, 100.f, 0.01), 100.f),
-		          std::make_unique<AudioParameterFloat> ("TANHAMP", "Tanh amp", NormalisableRange<float>(0.f, 100.f, 0.01), 100.f),
-		          std::make_unique<AudioParameterFloat> ("TANHSLOPE", "Tanh slope", NormalisableRange<float>(1.f, 15.f, 0.01), 1.f),
-		          std::make_unique<AudioParameterFloat> ("SINEAMP", "Sine amp", NormalisableRange<float>(0.f, 100.f, 0.01), 0.f),
-		          std::make_unique<AudioParameterFloat> ("SINEFREQ", "Sine freq", NormalisableRange<float>(0.5f, 100.f, 0.01), 1.f) })
+				{ std::make_unique<AudioParameterFloat> ("DRIVE", "Drive", NormalisableRange<float>(0.f, 40.f, 0.01f), 20.f),
+				  std::make_unique<AudioParameterFloat> ("MIX", "Mix", NormalisableRange<float>(0.f, 100.f, 0.01f), 100.f),
+		          std::make_unique<AudioParameterFloat> ("TANHAMP", "Tanh amp", NormalisableRange<float>(0.f, 100.f, 0.01f), 100.f),
+		          std::make_unique<AudioParameterFloat> ("TANHSLOPE", "Tanh slope", NormalisableRange<float>(1.f, 15.f, 0.01f), 1.f),
+		          std::make_unique<AudioParameterFloat> ("SINEAMP", "Sine amp", NormalisableRange<float>(0.f, 100.f, 0.01f), 0.f),
+		          std::make_unique<AudioParameterFloat> ("SINEFREQ", "Sine freq", NormalisableRange<float>(0.5f, 100.f, 0.01f), 1.f) })
 {
 	prmDrive = parameters.getRawParameterValue("DRIVE");
 	prmMix = parameters.getRawParameterValue("MIX");
@@ -146,16 +146,16 @@ void WaveshaperDemoAudioProcessor::processBlock (AudioSampleBuffer& buffer, Midi
 
 void WaveshaperDemoAudioProcessor::updateProcessing()
 {
-    driveVolume.setValue (Decibels::decibelsToGain (*prmDrive));
+    driveVolume.setTargetValue(Decibels::decibelsToGain (*prmDrive));
     
-	tanhAmplitude.setValue(*prmTanhAmp * 0.01f);
-	tanhSlope.setValue(*prmTanhSlope);
-	sineAmplitude.setValue(*prmSineAmp * 0.01f);
-	sineFrequency.setValue(*prmSineFreq);
+	tanhAmplitude.setTargetValue(*prmTanhAmp * 0.01f);
+	tanhSlope.setTargetValue(*prmTanhSlope);
+	sineAmplitude.setTargetValue(*prmSineAmp * 0.01f);
+	sineFrequency.setTargetValue(*prmSineFreq);
 
     auto mix = *prmMix * 0.01f;
-    dryVolume.setValue (1.f - mix);
-    wetVolume.setValue (mix);
+    dryVolume.setTargetValue(1.f - mix);
+    wetVolume.setTargetValue(mix);
 }
 
 //==============================================================================

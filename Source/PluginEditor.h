@@ -23,10 +23,10 @@ public:
 
 	void paint(Graphics& g) override
 	{
-		int width  = getWidth();
-		int height = getHeight();
+		auto width  = static_cast<float> (getWidth());
+		auto height = static_cast<float> (getHeight());
 
-		g.fillAll(Colours::darkslategrey.withMultipliedBrightness(.4));
+		g.fillAll(Colours::darkslategrey.withMultipliedBrightness(.4f));
 
 		// X
 		Array<float> x;
@@ -50,15 +50,15 @@ public:
 		for (int i = 0; i < resolution; i++)
 		{
 			float vNorm;
-			float v = tanhAmplitude * std::tanh(x[i] * tanhSlope) + sineAmplitude * std::sin(x[i] * sineFrequency);
+			float v1 = tanhAmplitude * std::tanh(x[i] * tanhSlope) + sineAmplitude * std::sin(x[i] * sineFrequency);
 
 			// clip to -1...1
-			if (v <= -1)
+			if (v1 <= -1)
 				vNorm = -1;
-			else if (v >= 1)
+			else if (v1 >= 1)
 				vNorm = +1;
 			else
-				vNorm = v;
+				vNorm = v1;
 			y.add(vNorm);
 		}
 
@@ -69,7 +69,7 @@ public:
 			t.lineTo(x[i], y[i]);
 
 		t.applyTransform(AffineTransform::scale(80.0f, 80.0f));
-		t.applyTransform(AffineTransform::translation(width / 2, height / 2));
+		t.applyTransform(AffineTransform::translation(width / 2.f, height / 2.f));
 		t.applyTransform(AffineTransform::verticalFlip(height));
 
 		g.setColour(Colours::white);
