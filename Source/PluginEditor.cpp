@@ -16,13 +16,10 @@ WaveshaperAudioProcessorEditor::WaveshaperAudioProcessorEditor(WaveshaperDemoAud
 {
 	lookAndFeel1.setColour(Slider::trackColourId, Colours::lightgreen);
 	lookAndFeel1.setColour(Slider::thumbColourId, Colours::green);
-
 	lookAndFeel2.setColour(Slider::trackColourId, Colours::lightpink);
 	lookAndFeel2.setColour(Slider::thumbColourId, Colours::salmon);
-
 	lookAndFeel3.setColour(Slider::trackColourId, Colours::lightblue);
 	lookAndFeel3.setColour(Slider::thumbColourId, Colours::blue );
-
 
 	driveLabel.setText("Drive", dontSendNotification);
 	mixLabel.setText("Mix", dontSendNotification);
@@ -134,8 +131,5 @@ void WaveshaperAudioProcessorEditor::resized()
 	sineFreqLabel.setBounds(sineFreqRect.removeFromLeft(paramLabelWidth));
 	sineFreqSlider.setBounds(sineFreqRect);
 
-
-
 	OnWaveshapeParamsChanged();
 }
-

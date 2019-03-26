@@ -55,14 +55,13 @@ public:
 			// clip to -1...1
 			if (v <= -1)
 				vNorm = -1;
-			else if ((v >= 1))
+			else if (v >= 1)
 				vNorm = +1;
 			else
 				vNorm = v;
 			y.add(vNorm);
 		}
 
-		// PATH
 		Path t;
 		
 		t.startNewSubPath(x[0], y[0]);
@@ -70,13 +69,10 @@ public:
 			t.lineTo(x[i], y[i]);
 
 		t.applyTransform(AffineTransform::scale(80.0f, 80.0f));
-
 		t.applyTransform(AffineTransform::translation(width / 2, height / 2));
-
 		t.applyTransform(AffineTransform::verticalFlip(height));
 
 		g.setColour(Colours::white);
-
 		g.strokePath(t, PathStrokeType(1.0f));
 	}
 
@@ -140,7 +136,6 @@ private:
 	// remove?
 	AudioProcessorValueTreeState& valueTreeState;
 
-
 	TransferFunctionGraphWidget transferFunctionGraph;
 
 	void OnWaveshapeParamsChanged();
@@ -149,27 +144,27 @@ private:
 	
 	// labels
 	Label driveLabel,
-		mixLabel,
-		tanhAmpLabel,
-		tanhSlopeLabel,
-		sineAmpLabel,
-		sineFreqLabel;
+		  mixLabel,
+		  tanhAmpLabel,
+		  tanhSlopeLabel,
+		  sineAmpLabel,
+		  sineFreqLabel;
 
 	// sliders
 	Slider driveSlider,
-		mixSlider,
-		tanhAmpSlider,
-		tanhSlopeSlider,
-		sineAmpSlider,
-		sineFreqSlider;
+           mixSlider,
+		   tanhAmpSlider,
+		   tanhSlopeSlider,
+		   sineAmpSlider,
+		   sineFreqSlider;
 
 	// attachments
 	std::unique_ptr<SliderAttachment> driveSliderAttachment,
-		mixSliderAttachment,
-		tanhAmpSliderAttachment,
-		tanhSlopeSliderAttachment,
-		sineAmpSliderAttachment,
-		sineFreqSliderAttachment;
+		                              mixSliderAttachment,
+		                              tanhAmpSliderAttachment,
+		                              tanhSlopeSliderAttachment,
+		                              sineAmpSliderAttachment,
+		                              sineFreqSliderAttachment;
 
 	// This reference is provided as a quick way for your editor to
 	// access the processor object that created it.

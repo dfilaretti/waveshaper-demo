@@ -15,13 +15,12 @@
 WaveshaperDemoAudioProcessor::WaveshaperDemoAudioProcessor()
 	: parameters(*this, nullptr)
 {
-	parameters.createAndAddParameter("DRIVE",     "Drive",          String(), NormalisableRange<float>(0.f, 40.f, 0.01),     20.f,    nullptr, nullptr);
-	parameters.createAndAddParameter("MIX",       "Mix",            String(), NormalisableRange<float>(0.f, 100.f, 0.01),    100.f,   nullptr, nullptr);
-
-	parameters.createAndAddParameter("TANHAMP",   "Tanh amp",       String(), NormalisableRange<float>(0.f, 100.f, 0.01),    100.f,   nullptr, nullptr);
-	parameters.createAndAddParameter("TANHSLOPE", "Tanh slope",     String(), NormalisableRange<float>(1.f, 15.f, 0.01),     1.f,     nullptr, nullptr);
-	parameters.createAndAddParameter("SINEAMP",   "Sine amp",       String(), NormalisableRange<float>(0.f, 100.f, 0.01),    0.f,     nullptr, nullptr);
-	parameters.createAndAddParameter("SINEFREQ",  "Sine freq",      String(), NormalisableRange<float>(0.5f, 100.f, 0.01),   1.f,     nullptr, nullptr);
+	parameters.createAndAddParameter("DRIVE", "Drive", String(), NormalisableRange<float>(0.f, 40.f, 0.01), 20.f, nullptr, nullptr);
+	parameters.createAndAddParameter("MIX", "Mix", String(), NormalisableRange<float>(0.f, 100.f, 0.01), 100.f, nullptr, nullptr);
+	parameters.createAndAddParameter("TANHAMP", "Tanh amp", String(), NormalisableRange<float>(0.f, 100.f, 0.01), 100.f, nullptr, nullptr);
+	parameters.createAndAddParameter("TANHSLOPE", "Tanh slope", String(), NormalisableRange<float>(1.f, 15.f, 0.01), 1.f, nullptr, nullptr);
+	parameters.createAndAddParameter("SINEAMP", "Sine amp", String(), NormalisableRange<float>(0.f, 100.f, 0.01), 0.f, nullptr, nullptr);
+	parameters.createAndAddParameter("SINEFREQ", "Sine freq", String(), NormalisableRange<float>(0.5f, 100.f, 0.01), 1.f, nullptr, nullptr);
 
 	parameters.state = ValueTree(Identifier("Waveshaper"));
 
@@ -85,12 +84,10 @@ void WaveshaperDemoAudioProcessor::reset()
 	tanhSlope.reset(getSampleRate(), 0.05);
 	sineAmplitude.reset(getSampleRate(), 0.05);
 	sineFrequency.reset(getSampleRate(), 0.05);
-    
 }
 
 void WaveshaperDemoAudioProcessor::releaseResources()
 {
-
 }
 
 void WaveshaperDemoAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& /*midiMessages*/)
@@ -100,6 +97,7 @@ void WaveshaperDemoAudioProcessor::processBlock (AudioSampleBuffer& buffer, Midi
 
     updateProcessing();
     
+	// Initial setup
     // ------------------------------------------------------------------------------------------
     const auto totalNumInputChannels  = getTotalNumInputChannels();
     const auto totalNumOutputChannels = getTotalNumOutputChannels();
@@ -117,18 +115,17 @@ void WaveshaperDemoAudioProcessor::processBlock (AudioSampleBuffer& buffer, Midi
 
     // Drive Volume
     // ------------------------------------------------------------------------------------------
-    
 	driveVolume.applyGain (buffer, numSamples);
     
     // Waveshaper
     // ------------------------------------------------------------------------------------------
-
 	for (auto channel = 0; channel < numChannels; channel++)
 	{
 		auto* channelData = buffer.getWritePointer(channel);
 
 		for (auto i = 0; i < numSamples; i++)
-			channelData[i] = tanhAmplitude.getNextValue() * std::tanh(channelData[i] * tanhSlope.getNextValue()) + sineAmplitude.getNextValue() * std::sin(channelData[i] * sineFrequency.getNextValue());
+			channelData[i] = tanhAmplitude.getNextValue() * std::tanh(channelData[i] * tanhSlope.getNextValue()) 
+			               + sineAmplitude.getNextValue() * std::sin(channelData[i] * sineFrequency.getNextValue());
 	}
 
     // Mix processing
@@ -139,10 +136,8 @@ void WaveshaperDemoAudioProcessor::processBlock (AudioSampleBuffer& buffer, Midi
     for (auto channel = 0; channel < numChannels; channel++)
         buffer.addFrom(channel, 0, mixBuffer, channel, 0, numSamples);
     
-
     // Hard clipper limiter
     // ------------------------------------------------------------------------------------------
-    
 	for (auto channel = 0; channel < numChannels; channel++)
     {
         auto* channelData = buffer.getWritePointer (channel);
