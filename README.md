@@ -1,6 +1,6 @@
 # waveshaper-demo
 
-Implementation of a simple Waveshaping effect with adjustable transfer function.
+Simple Waveshaping effect with tweakable transfer function.
 
 ![Waveshaper-Screenshot](screenshot.png)
 
@@ -8,7 +8,8 @@ Implementation of a simple Waveshaping effect with adjustable transfer function.
 
 ## Description
 
-"Drive" controls the level of the input signal _before_ it has the waveshaping applied, and "Mix" blends between the dry and wet signals. 
+The input signal's level is first scaled via the DRIVE control, after that the signal is passed through the waveshape transfer function. 
+Finally, the MIX control allow to blend between the original and modified signals. 
 
 The tranfers function is made of two building blocks:
 
@@ -16,7 +17,6 @@ The tranfers function is made of two building blocks:
 * a [sinusoidal](https://en.wikipedia.org/wiki/Sine_wave) component with (adjustable frequency and amplitude)
 
 By adjusting those parameters ("Tanh slope" and "Sin freq") and the relative amplitudes ("Tanh amp" and "Sin amp"), it is possible to blend between the two shapes in various ways to achieve different effects (see [video](https://youtu.be/p1vSqWyyqf0))
-
 
 ## Useful resources & Info
 
