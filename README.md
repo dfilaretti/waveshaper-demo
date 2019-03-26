@@ -16,7 +16,7 @@ The tranfers function is made of two building blocks:
 * an [hyperbolic tangent](http://mathworld.wolfram.com/HyperbolicTangent.html) component (with adjustable "slope" and amplitude)
 * a [sinusoidal](https://en.wikipedia.org/wiki/Sine_wave) component with (adjustable frequency and amplitude)
 
-By adjusting those parameters ("Tanh slope" and "Sin freq") and the relative amplitudes ("Tanh amp" and "Sin amp"), it is possible to blend between the two shapes in various ways to achieve different effects (see [video](https://youtu.be/p1vSqWyyqf0))
+By tweaking those parameters (TANH SLOPE and SINE FREQ) and the relative amplitudes (TANH AMP and SIN AMP), it is possible to come up with different shapes and thus different audible effects (see [video](https://youtu.be/p1vSqWyyqf0))
 
 ## Useful resources & Info
 
